@@ -14,20 +14,30 @@ type SectionAnchor = {
   readonly label: string;
 };
 
-function getSectionAnchors(content: SiteContent): readonly SectionAnchor[] {
-  return [
+function getSectionAnchors(
+  content: SiteContent,
+  excludedIds: readonly SectionId[] = [],
+): readonly SectionAnchor[] {
+  const sections = [
     { id: content.hero.id, label: content.hero.headline },
     { id: content.steps.id, label: content.steps.heading },
     { id: content.features.id, label: content.features.heading },
     { id: content.benefits.id, label: content.benefits.heading },
     { id: content.faq.id, label: content.faq.heading },
   ];
+
+  return sections.filter((section) => !excludedIds.includes(section.id));
 }
 
-function SectionAnchorTargets({ content }: Pick<AppShellProps, "content">) {
+function SectionAnchorTargets({
+  content,
+  excludedIds,
+}: Pick<AppShellProps, "content"> & {
+  readonly excludedIds?: readonly SectionId[];
+}) {
   return (
     <>
-      {getSectionAnchors(content).map((section) => (
+      {getSectionAnchors(content, excludedIds).map((section) => (
         <section
           aria-label={section.label}
           className="min-h-24 scroll-mt-24"
@@ -56,6 +66,9 @@ export function AppShell({ children, content, ctaUrl }: AppShellProps) {
       />
       <main className="min-h-[60vh]" id="main">
         {children ?? <SectionAnchorTargets content={content} />}
+        {children ? (
+          <SectionAnchorTargets content={content} excludedIds={[content.hero.id]} />
+        ) : null}
       </main>
       <Footer
         copyright={content.footer.copyright}

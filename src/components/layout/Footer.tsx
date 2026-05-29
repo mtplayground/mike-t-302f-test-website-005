@@ -33,7 +33,12 @@ export function Footer({ content, ctaUrl, navItems, siteName }: FooterProps) {
             </p>
           </div>
 
-          <Button aria-label={content.cta.ariaLabel} href={ctaUrl} size="lg">
+          <Button
+            aria-label={content.cta.ariaLabel}
+            className="w-full sm:w-fit"
+            href={ctaUrl}
+            size="lg"
+          >
             {content.cta.label}
           </Button>
         </div>

@@ -34,7 +34,12 @@ export function Section({
 }: SectionProps) {
   return (
     <section
-      className={cn(spacingClasses[spacing], variantClasses[variant], className)}
+      className={cn(
+        "scroll-mt-24",
+        spacingClasses[spacing],
+        variantClasses[variant],
+        className,
+      )}
       id={id}
       {...sectionProps}
     >

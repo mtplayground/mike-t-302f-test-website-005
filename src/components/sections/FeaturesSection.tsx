@@ -7,7 +7,7 @@ export type FeaturesSectionProps = {
 
 const markerClasses = [
   "bg-brand-600 text-white",
-  "bg-accent-500 text-white",
+  "bg-accent-700 text-white",
   "bg-ink text-white",
   "bg-surface-raised text-brand-700",
 ] as const;
@@ -21,7 +21,6 @@ function FeatureCard({
 }) {
   return (
     <Card
-      aria-label={feature.title}
       className="group h-full min-h-60 p-7"
       variant={index === 1 ? "accent" : "default"}
     >
@@ -45,7 +44,7 @@ export function FeaturesSection({ content }: FeaturesSectionProps) {
     <Section id={content.id} innerClassName="space-y-12">
       <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand-700">
+          <p className="text-sm font-semibold uppercase tracking-normal text-brand-700">
             {content.eyebrow}
           </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -57,11 +56,13 @@ export function FeaturesSection({ content }: FeaturesSectionProps) {
         </p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2">
+      <ul className="grid gap-5 md:grid-cols-2">
         {content.items.map((feature, index) => (
-          <FeatureCard feature={feature} index={index} key={feature.title} />
+          <li key={feature.title}>
+            <FeatureCard feature={feature} index={index} />
+          </li>
         ))}
-      </div>
+      </ul>
     </Section>
   );
 }

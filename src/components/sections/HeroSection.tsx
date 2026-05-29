@@ -16,13 +16,13 @@ export function HeroSection({ content, ctaUrl }: HeroSectionProps) {
       spacing="tight"
     >
       <div className="max-w-3xl">
-        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-brand-700">
+        <p className="mb-5 text-sm font-semibold uppercase tracking-normal text-brand-700">
           {content.eyebrow}
         </p>
-        <h1 className="font-display text-5xl font-bold leading-[1.02] text-ink sm:text-6xl lg:text-7xl">
+        <h1 className="font-display text-4xl font-bold leading-tight text-ink sm:text-5xl lg:text-6xl">
           {content.headline}
         </h1>
-        <p className="mt-6 max-w-2xl text-2xl font-semibold leading-tight text-ink-muted sm:text-3xl">
+        <p className="mt-6 max-w-2xl text-xl font-semibold leading-tight text-ink-muted sm:text-2xl">
           {content.subhead}
         </p>
         <p className="mt-6 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">

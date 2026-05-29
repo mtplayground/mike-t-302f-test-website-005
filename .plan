@@ -1,0 +1,27 @@
+Architecture plan for mike-t-302f-test-website-005
+
+Issue scope
+- Issue #1 initializes a Vite + React + TypeScript application with dev, build, and preview scripts.
+- The first implementation should produce a clean entry point that renders an empty page and establishes the project structure.
+
+Module structure and file organization
+- package.json: npm scripts and runtime/build dependencies.
+- index.html: Vite HTML entry point.
+- src/main.tsx: React root bootstrap using createRoot.
+- src/App.tsx: top-level application component, initially rendering an empty page.
+- src/index.css: global reset/base styles for the empty app shell.
+- vite.config.ts: Vite React configuration.
+- tsconfig.json, tsconfig.app.json, tsconfig.node.json: TypeScript configuration split in the standard Vite template shape.
+
+Shared types
+- No shared domain types are needed for the bootstrap issue.
+- If later issues add data models or API boundaries, shared types should live under src/types or near their owning feature module depending on reuse.
+
+Dependencies between issues
+- Issue #1 is the foundation for all future frontend work because it establishes the build system, TypeScript setup, and React entry point.
+- No other issue dependencies are currently known.
+
+Key design decisions
+- Use the official Vite React TypeScript project layout to minimize custom setup and keep future maintenance predictable.
+- Keep the initial UI intentionally empty to match the issue scope.
+- Avoid adding app-specific abstractions until future issues define actual product behavior.

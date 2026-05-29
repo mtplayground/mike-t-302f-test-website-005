@@ -7,6 +7,7 @@ export type AppShellProps = {
   readonly children?: ReactNode;
   readonly content: SiteContent;
   readonly ctaUrl: string;
+  readonly renderedSectionIds?: readonly SectionId[];
 };
 
 type SectionAnchor = {
@@ -49,7 +50,12 @@ function SectionAnchorTargets({
   );
 }
 
-export function AppShell({ children, content, ctaUrl }: AppShellProps) {
+export function AppShell({
+  children,
+  content,
+  ctaUrl,
+  renderedSectionIds = [],
+}: AppShellProps) {
   return (
     <div className="min-h-screen bg-transparent text-ink">
       <a
@@ -67,7 +73,7 @@ export function AppShell({ children, content, ctaUrl }: AppShellProps) {
       <main className="min-h-[60vh]" id="main">
         {children ?? <SectionAnchorTargets content={content} />}
         {children ? (
-          <SectionAnchorTargets content={content} excludedIds={[content.hero.id]} />
+          <SectionAnchorTargets content={content} excludedIds={renderedSectionIds} />
         ) : null}
       </main>
       <Footer

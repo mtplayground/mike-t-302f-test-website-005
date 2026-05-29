@@ -1,8 +1,8 @@
-target/
-node_modules/
-dist/
+dist
+node_modules
+coverage
 .gh_token
-.claude/
+.claude
 .database_url
 .task_id
 .container_name
@@ -10,10 +10,4 @@ dist/
 .gh_user
 .github_token
 .pipeline-state.json
-.gitkeep
 .progress
-.env
-.env.local
-.env.*.local
-
-.db_decision

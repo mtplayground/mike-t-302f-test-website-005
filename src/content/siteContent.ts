@@ -127,6 +127,15 @@ export const siteContent = {
     ],
   },
   footer: {
+    eyebrow: "Ready when you are",
+    heading: "Start building with an autonomous software team",
+    description:
+      "Bring mike-t-302f-test-website-005 your product direction and turn it into planned, built, and deployable software you own.",
+    cta: {
+      label: "Start a conversation",
+      ariaLabel:
+        "Start a conversation about building with mike-t-302f-test-website-005",
+    },
     copyright: "mike-t-302f-test-website-005",
   },
 } as const satisfies SiteContent;

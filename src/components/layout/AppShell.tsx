@@ -77,7 +77,8 @@ export function AppShell({
         ) : null}
       </main>
       <Footer
-        copyright={content.footer.copyright}
+        content={content.footer}
+        ctaUrl={ctaUrl}
         navItems={content.navItems}
         siteName={content.siteName}
       />

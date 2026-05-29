@@ -73,6 +73,14 @@ export type FaqSectionContent = {
   readonly items: readonly FaqItem[];
 };
 
+export type FooterContent = {
+  readonly eyebrow: string;
+  readonly heading: string;
+  readonly description: string;
+  readonly cta: CtaContent;
+  readonly copyright: string;
+};
+
 export type SiteContent = {
   readonly siteName: string;
   readonly navItems: readonly NavItem[];
@@ -81,7 +89,5 @@ export type SiteContent = {
   readonly features: FeaturesSectionContent;
   readonly benefits: BenefitsSectionContent;
   readonly faq: FaqSectionContent;
-  readonly footer: {
-    readonly copyright: string;
-  };
+  readonly footer: FooterContent;
 };

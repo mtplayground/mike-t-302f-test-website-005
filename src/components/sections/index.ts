@@ -1,5 +1,7 @@
 export { BenefitsSection } from "./BenefitsSection";
 export type { BenefitsSectionProps } from "./BenefitsSection";
+export { FaqSection } from "./FaqSection";
+export type { FaqSectionProps } from "./FaqSection";
 export { FeaturesSection } from "./FeaturesSection";
 export type { FeaturesSectionProps } from "./FeaturesSection";
 export { HeroSection } from "./HeroSection";

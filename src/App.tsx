@@ -1,6 +1,7 @@
 import { AppShell } from "./components/layout";
 import {
   BenefitsSection,
+  FaqSection,
   FeaturesSection,
   HeroSection,
   HowItWorksSection,
@@ -20,12 +21,14 @@ export function App() {
         siteContent.steps.id,
         siteContent.features.id,
         siteContent.benefits.id,
+        siteContent.faq.id,
       ]}
     >
       <HeroSection content={siteContent.hero} ctaUrl={appEnv.ctaUrl} />
       <HowItWorksSection content={siteContent.steps} />
       <FeaturesSection content={siteContent.features} />
       <BenefitsSection content={siteContent.benefits} />
+      <FaqSection content={siteContent.faq} />
     </AppShell>
   );
 }

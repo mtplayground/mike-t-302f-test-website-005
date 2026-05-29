@@ -1,37 +1,36 @@
-Architecture plan for mike-t-302f-test-website-005
+Architecture plan for mike-t-302f-test-website-005 issues #23-#27
 
 Product and app shape
 - Product name: mike-t-302f-test-website-005.
-- The app is a Vite + React + TypeScript single-page landing page for an "Agent Team for Founders" offer.
-- Future implementation should keep all copy product-driven and editable through shared content data, not hardcoded throughout presentational components.
+- Current stack: Vite + React + TypeScript single-page landing page.
+- Product copy and labels should continue to come from PRODUCT.md and src/content/siteContent.ts.
+- CTA destinations should continue to come from src/config/env.ts via VITE_CTA_URL.
 
 Module structure and file organization
-- src/main.tsx: React bootstrap only.
-- src/App.tsx: top-level composition of the landing page shell and sections.
-- src/index.css: Tailwind imports, base layer, global page styles, and smooth scrolling.
-- src/config/env.ts: typed build-time env accessor for values such as VITE_CTA_URL.
-- src/content/siteContent.ts: single editable content source for nav items, hero copy, SDLC steps, feature cards, benefits, FAQ items, CTA labels, and footer copy.
-- src/types/content.ts: shared content contracts such as NavItem, HeroContent, StepItem, FeatureItem, BenefitItem, FAQItem, and SiteContent.
-- src/components/ui/: reusable primitives including Button, Section, Card, and AccordionItem.
-- src/components/layout/: AppShell, Header/Nav, and Footer.
-- src/components/sections/: Hero, HowItWorks, Features, FounderBenefits, and FAQ.
-- src/lib/: small shared helpers only when needed, such as class name merging.
+- src/App.tsx: compose the full landing page and pass the resolved CTA URL into sections/layout.
+- src/content/siteContent.ts: add footer CTA content, footer link groups, and any test-facing section metadata.
+- src/types/content.ts: extend SiteContent with footer CTA/link contracts and keep section IDs typed for nav and tests.
+- src/components/layout/Footer.tsx: evolve from simple copyright/nav into the footer CTA section for issue #23.
+- src/components/layout/AppShell.tsx and Header.tsx: keep semantic landmarks and anchor navigation centralized.
+- src/components/sections/: keep page sections data-driven and expose stable IDs for a11y and E2E coverage.
+- src/components/ui/: keep Button, Section, Card, and AccordionItem as shared primitives; add only small testable primitives if repetition appears.
+- src/config/env.ts: remain the single place that validates VITE_CTA_URL.
+- tests/unit or src/**/*.test.tsx: Vitest + React Testing Library component/content tests for issue #25.
+- tests/e2e/: Playwright landing page tests for issue #26.
+- README.md and .env.example: run, build, preview, deploy, and environment documentation for issue #27.
 
 Dependencies between issues
-- Issue #3 should land first because Tailwind and design tokens define the styling contract for every UI issue.
-- Issue #4 can run in parallel with #3 after the initial app exists; env access is required before wiring CTAs.
-- Issue #5 should follow #3/#4 so content and env-aware CTA data can be typed cleanly.
-- Issue #6 depends on #3 and should use the design tokens without owning product copy.
-- Issue #7 depends on #5 and #6 because the shell needs nav/footer content and reusable buttons/sections.
-- Issue #8 depends on #4, #5, and #6 because the hero uses content data, the CTA URL, and UI primitives.
-- Issues #9, #10, and #11 depend on #5 and #6 because they render typed content through cards/sections.
-- Issue #12 depends on #5 and #6 because FAQ content should come from the content module and use AccordionItem.
+- #23 should be implemented first among this set because it completes the visible page surface and expands footer content/types.
+- #24 depends on all visual sections, including #23, so the responsive and accessibility pass should happen after the footer CTA lands.
+- #25 depends on completed component/content behavior; tests should cover the footer CTA, section rendering, UI primitives, and VITE_CTA_URL wiring.
+- #26 depends on a stable rendered page and test tooling from #25; Playwright should verify load, section presence, anchor scrolling, and CTA hrefs.
+- #27 should be last because production build/deploy prep should document the final scripts, env requirements, static dist output, and verification path.
 
 Key design decisions
-- Keep components presentational and data-driven; section components should receive or import typed content rather than duplicating copy.
-- Centralize brand tokens in Tailwind theme configuration and map them to semantic names such as brand, surface, text, border, accent, and muted.
-- Prefer simple React state for the FAQ accordion; no routing or state library is needed for this single-page landing page.
-- Use anchor IDs for sections and nav links so the layout shell can support smooth in-page navigation without adding a router.
-- Keep CTA behavior behind the typed env accessor so missing or malformed VITE_CTA_URL fails predictably during development.
-- Use accessible HTML first: semantic sections, real buttons/links, visible focus styles, aria-expanded on accordion triggers, and heading order that matches page structure.
-- Do not introduce broad abstractions beyond the listed UI primitives until repeated section implementation shows a concrete need.
+- Keep the landing page static and client-rendered; no router or state library is needed.
+- Keep CTA links as real anchors using the normalized URL from getAppEnv so header, hero, and footer behavior stays consistent.
+- Use semantic landmarks: header, main, footer, section headings, nav labels, and real buttons/links.
+- Preserve visible focus states and WCAG AA contrast while using existing Tailwind CSS theme tokens in src/index.css.
+- Prefer data-testid only where role/name queries are brittle; tests should primarily assert accessible roles, names, headings, and links.
+- Playwright should run against the Vite dev server or preview server and set VITE_CTA_URL to a deterministic test URL.
+- Production deploy prep should treat dist/ as generated output, keep secrets out of git, and document static hosting requirements rather than committing build artifacts.

@@ -22,7 +22,7 @@ export function FaqSection({ content }: FaqSectionProps) {
   return (
     <Section id={content.id} innerClassName="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand-700">
+        <p className="text-sm font-semibold uppercase tracking-normal text-brand-700">
           {content.eyebrow}
         </p>
         <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-ink sm:text-4xl lg:text-5xl">

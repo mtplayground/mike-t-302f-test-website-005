@@ -19,11 +19,8 @@ export function Header({ cta, ctaUrl, navItems, siteName }: HeaderProps) {
           {siteName}
         </a>
 
-        <nav
-          aria-label="Primary"
-          className="order-last w-full overflow-x-auto md:order-none md:w-auto"
-        >
-          <ul className="flex min-w-max items-center gap-2 text-sm font-medium text-ink-muted md:justify-center">
+        <nav aria-label="Primary" className="order-last w-full md:order-none md:w-auto">
+          <ul className="flex flex-wrap items-center gap-2 text-sm font-medium text-ink-muted md:justify-center">
             {navItems.map((item) => (
               <li key={item.href}>
                 <a

@@ -29,7 +29,7 @@ export function BenefitsSection({ content }: BenefitsSectionProps) {
   return (
     <Section id={content.id} innerClassName="space-y-12" variant="muted">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand-700">
+        <p className="text-sm font-semibold uppercase tracking-normal text-brand-700">
           {content.eyebrow}
         </p>
         <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -40,11 +40,13 @@ export function BenefitsSection({ content }: BenefitsSectionProps) {
         </p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-3">
+      <ul className="grid gap-5 md:grid-cols-3">
         {content.items.map((benefit, index) => (
-          <BenefitCard benefit={benefit} index={index} key={benefit.title} />
+          <li key={benefit.title}>
+            <BenefitCard benefit={benefit} index={index} />
+          </li>
         ))}
-      </div>
+      </ul>
     </Section>
   );
 }
